@@ -14,6 +14,9 @@ WiFi captive portal meant for the NodeMCU ESP8266. It creates a WiFi with the na
 To install this program to the ESP8266, it is necessary to install the [PString library](http://arduiniana.org/libraries/pstring/), the [Streaming library](http://arduiniana.org/libraries/streaming/), the [ESP8266 FS plugin](https://github.com/esp8266/arduino-esp8266fs-plugin) and of course the [ESP8266 Board](http://arduino.esp8266.com/stable/package_esp8266com_index.json) to the Arduino IDE. The filesystem plugin will have to be used for uploading the files in the data folder. Read on how to do this [here](https://github.com/esp8266/arduino-esp8266fs-plugin).
 
 
+# Editing the default captive page
+
+To edit the default captive page, you can unarchive the gzip file `index.htm.gz` and edit it to your liking. You are then required to use gzip to archive the file and upload them using arduino-esp8266fs-plugin.
 
 ### Credits
 
